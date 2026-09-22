@@ -30,17 +30,6 @@
   /* ---- Navigation : fond au défilement ---- */
   const nav = document.querySelector(".nav");
 
-  /* Menu plein écran (téléphone) */
-  const toggle = nav.querySelector(".nav__toggle");
-  const setMenu = (open) => {
-    nav.classList.toggle("menu-open", open);
-    toggle.setAttribute("aria-expanded", open);
-    toggle.textContent = open ? "Fermer" : "Menu";
-    document.body.style.overflow = open ? "hidden" : "";
-  };
-  toggle.addEventListener("click", () => setMenu(!nav.classList.contains("menu-open")));
-  document.addEventListener("keydown", (e) => { if (e.key === "Escape") setMenu(false); });
-
   /* Liens internes : défilement sans modifier l'adresse (le lien partagé reste propre) */
   document.querySelectorAll('a[href^="#"]').forEach((a) =>
     a.addEventListener("click", (e) => {
@@ -48,7 +37,6 @@
       const target = id === "top" ? document.body : document.getElementById(id);
       if (!target) return;
       e.preventDefault();
-      setMenu(false);
       target.scrollIntoView({ behavior: reduced ? "auto" : "smooth" });
     }));
   const onScroll = () => nav.classList.toggle("is-scrolled", scrollY > 40);
