@@ -10,7 +10,12 @@
   <meta name="theme-color" content="#0b0b0c">
   <link rel="canonical" href="https://seemore-lab.github.io/">
   <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
-  <script>document.documentElement.classList.add("js")</script>
+  <script>
+    document.documentElement.classList.add("js");
+    // Le site s'ouvre toujours en haut, même si le lien partagé finit par #contact, #films…
+    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+    if (location.hash) { window.__hadHash = true; history.replaceState(null, "", location.pathname + location.search); }
+  </script>
 
   <!-- Partage (Open Graph / réseaux sociaux) -->
   <meta property="og:type" content="website">
@@ -58,11 +63,13 @@
     <svg class="brand__mark" aria-hidden="true"><use href="#mark"/></svg>
     <span class="brand__word">SEEMORE<span>LAB</span></span>
   </a>
-  <ul class="nav__links">
+  <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
+  <ul class="nav__links" id="menu">
     <li><a href="#films">Films</a></li>
-    <li class="hide-sm"><a href="#services">Services</a></li>
-    <li class="hide-sm"><a href="#apropos">À propos</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#apropos">À propos</a></li>
     <li><a href="#contact">Contact</a></li>
+    <li class="nav__caption" aria-hidden="true">Ceci n'est pas un menu.</li>
   </ul>
 </nav>
 
